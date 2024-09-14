@@ -1,4 +1,4 @@
-import { List, ListItem, Stack, Wrap, WrapItem, Text } from "@chakra-ui/react";
+import { List, ListItem, Stack, Wrap, WrapItem, Text, Heading, Box } from "@chakra-ui/react";
 
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import ITodo from "../interfaces/iTodo";
@@ -33,7 +33,12 @@ const Taskslist = (props: Params) => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Text fontSize="lg">{item.title}</Text>
+            <Box>
+              <Heading as="h3" size="md">
+                {item.title}
+              </Heading>
+              <Text fontSize="md">{item.description}</Text>
+            </Box>
             <Wrap>
               <WrapItem>
                 <AiFillEdit onClick={() => editItem(item)} cursor="pointer" />

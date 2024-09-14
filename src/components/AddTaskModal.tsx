@@ -14,30 +14,29 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/react";
-import iTodo from "../interfaces/iTodo";
+import iAddTodo from "../interfaces/iAddTodo";
 
 interface AddTaskModalProps {
-  onAddTask: (item: iTodo) => void;
+  onAddTask: (item: iAddTodo) => void;
 }
 
 const AddTaskModal: React.FC<AddTaskModalProps> = ({ onAddTask }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
   const [newTaskCompleted, setNewTaskCompleted] = useState(false);
-  const [newTaskId, setNewTaskId] = useState(0);
 
   const handleAddTask = () => {
-    setNewTaskId(Math.floor(Math.random() * 100) + 1);
     if (newTaskTitle.trim()) {
-      const item: iTodo = {
-        id: newTaskId,
+      const item: iAddTodo = {
         title: newTaskTitle,
+        description: newDescription,
         completed: newTaskCompleted,
       };
       onAddTask(item);
       setNewTaskTitle("");
+      setNewDescription("");
       setNewTaskCompleted(false);
-      setNewTaskId(0);
       onClose();
     }
   };
@@ -57,6 +56,10 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ onAddTask }) => {
             <FormControl>
               <FormLabel>Titulo</FormLabel>
               <Input value={newTaskTitle} onChange={(e) => setNewTaskTitle(e.target.value)} placeholder="Insira um titulo" />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Descrição</FormLabel>
+              <Input value={newDescription} onChange={(e) => setNewDescription(e.target.value)} placeholder="Insira uma descrição" />
             </FormControl>
           </ModalBody>
 
