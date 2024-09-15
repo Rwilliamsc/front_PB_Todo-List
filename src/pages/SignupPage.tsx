@@ -30,7 +30,7 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <Container centerContent>
+    <Container maxW="xl" centerContent>
       <Box w="100%" mt={10}>
         <Heading as="h1" size="xl" textAlign="center" mb={6}>
           Criação de Conta

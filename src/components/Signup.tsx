@@ -50,12 +50,12 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         Criar Nova Conta
       </Heading> */}
       <form onSubmit={handleSubmit}>
-        <Stack spacing={4} width="600px">
+        <Stack spacing={4} width="md">
           <FormControl id="name" isRequired>
             <FormLabel>Nome</FormLabel>
-            <Input width="600px" type="text" name="name" value={formData.name} onChange={handleChange} />
+            <Input type="text" name="name" value={formData.name} onChange={handleChange} />
           </FormControl>
-          <Flex justifyContent="space-between" width="600px">
+          <Flex justifyContent="space-between" width="md">
             <FormControl id="email" isRequired>
               <FormLabel>Email</FormLabel>
               <Input type="email" name="email" value={formData.email} onChange={handleChange} />

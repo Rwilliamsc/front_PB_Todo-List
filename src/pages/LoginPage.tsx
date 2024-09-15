@@ -14,7 +14,7 @@ export interface iDecodedToken {
   exp: number;
 }
 
-const Login = () => {
+const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = React.useState(false);
@@ -82,4 +82,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

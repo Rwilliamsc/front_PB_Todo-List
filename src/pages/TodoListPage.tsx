@@ -16,7 +16,7 @@ import initialEditTodo from "../utils/initialEditTodo";
 //   { id: 3, title: "teste 3", description: "Descrição para teste", userId: 0, completed: false },
 // ];
 
-const TodoList = () => {
+const TodoListPage = () => {
   const [todos, setTodos] = useState<iTodo[]>([]);
   const [editTodo, setEditTodo] = useState<iTodo>(initialEditTodo);
   const { token, userId } = useAuth();
@@ -90,4 +90,4 @@ const TodoList = () => {
   );
 };
 
-export default TodoList;
+export default TodoListPage;

@@ -6,6 +6,7 @@ interface AuthContextType {
   userId: number | null;
   login: (token: string, user: string, userId: number) => void;
   logout: () => void;
+  restoreContext: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -32,7 +33,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("userId");
   };
 
-  return <AuthContext.Provider value={{ user, userId, token, login, logout }}>{children}</AuthContext.Provider>;
+  const restoreContext = () => {
+    setToken(localStorage.getItem("token"));
+    setUser(localStorage.getItem("user"));
+    setUserId(Number(localStorage.getItem("userId")));
+  };
+
+  return <AuthContext.Provider value={{ user, userId, token, login, logout, restoreContext }}>{children}</AuthContext.Provider>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
