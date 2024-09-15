@@ -19,7 +19,7 @@ import initialEditTodo from "../utils/initialEditTodo";
 const TodoList = () => {
   const [todos, setTodos] = useState<iTodo[]>([]);
   const [editTodo, setEditTodo] = useState<iTodo>(initialEditTodo);
-  const { token } = useAuth();
+  const { token, userId } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const TodoList = () => {
 
       const fetchTodos = async () => {
         try {
-          const response = await api.get("/tasks");
+          const response = await api.get(`/task-service/api/tasks/user/${userId}`);
           setTodos(response.data);
         } catch (error) {
           console.error("Error fetching todos", error);
@@ -37,11 +37,14 @@ const TodoList = () => {
 
       fetchTodos();
     }
-  }, [token]);
+  }, [token, userId]);
 
   const addTask = async (newTask: iAddTodo) => {
     try {
-      const response = await api.post("/tasks", newTask);
+      if (userId) {
+        newTask.userId = userId;
+      }
+      const response = await api.post("/task-service/api/tasks", newTask);
       setTodos((prevTodos) => [...prevTodos, response.data]);
     } catch (error) {
       console.error("Error add task", error);
@@ -50,7 +53,7 @@ const TodoList = () => {
 
   const deleteTask = async (taskToDelete: iTodo) => {
     try {
-      await api.delete(`/tasks/${taskToDelete.id}`);
+      await api.delete(`/task-service/api/tasks/${taskToDelete.id}`);
       setTodos((prevTodos) => prevTodos.filter((task) => task.id !== taskToDelete.id));
     } catch (error) {
       console.error("Error remove task", error);
@@ -64,7 +67,7 @@ const TodoList = () => {
 
   const saveEditTask = async (updatedTask: iTodo) => {
     try {
-      const response = await api.put(`/tasks/${updatedTask.id}`, updatedTask);
+      const response = await api.put(`/task-service/api/tasks/${updatedTask.id}`, updatedTask);
       setTodos((prevTodos) => prevTodos.map((task) => (task.id === updatedTask.id ? response.data : task)));
     } catch (error) {
       console.error("Error edit task", error);

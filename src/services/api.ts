@@ -1,8 +1,7 @@
-// src/services/api.ts
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/api", // Coloque a URL base do seu backend aqui
+  baseURL: "http://localhost:8080/",
 });
 
 export const setAuthToken = (token: string | null) => {

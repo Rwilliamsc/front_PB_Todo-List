@@ -3,7 +3,8 @@ import { createContext, useState, useContext, ReactNode } from "react";
 interface AuthContextType {
   user: string | null;
   token: string | null;
-  login: (token: string, user: string) => void;
+  userId: number | null;
+  login: (token: string, user: string, userId: number) => void;
   logout: () => void;
 }
 
@@ -11,13 +12,16 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<string | null>(null);
+  const [userId, setUserId] = useState<number | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  const login = (token: string, user: string) => {
+  const login = (token: string, user: string, userId: number) => {
     setToken(token);
     setUser(user);
+    setUserId(userId);
     localStorage.setItem("token", token);
     localStorage.setItem("user", user);
+    localStorage.setItem("userId", userId.toString());
   };
 
   const logout = () => {
@@ -25,9 +29,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("userId");
   };
 
-  return <AuthContext.Provider value={{ user, token, login, logout }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, userId, token, login, logout }}>{children}</AuthContext.Provider>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
