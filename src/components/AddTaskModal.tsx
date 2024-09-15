@@ -31,6 +31,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ onAddTask }) => {
       const item: iAddTodo = {
         title: newTaskTitle,
         description: newDescription,
+        userId: 0,
         completed: newTaskCompleted,
       };
       onAddTask(item);

@@ -6,15 +6,9 @@ import Taskslist from "../components/Taskslist";
 import iTodo from "../interfaces/iTodo";
 import AddTaskModal from "../components/AddTaskModal";
 import EditTaskModal from "../components/EditTaskModal";
-import api, { setAuthToken } from "../services/api";
+import api from "../services/api";
 import iAddTodo from "../interfaces/iAddTodo";
 import initialEditTodo from "../utils/initialEditTodo";
-
-// const mockTodo: iTodo[] = [
-//   { id: 1, title: "teste 1", description: "Descrição para teste", userId: 0, completed: false },
-//   { id: 2, title: "teste 2", description: "Descrição para teste", userId: 0, completed: false },
-//   { id: 3, title: "teste 3", description: "Descrição para teste", userId: 0, completed: false },
-// ];
 
 const TodoListPage = () => {
   const [todos, setTodos] = useState<iTodo[]>([]);
@@ -23,9 +17,7 @@ const TodoListPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    if (!token) {
-      setAuthToken(token);
-
+    if (token && userId) {
       const fetchTodos = async () => {
         try {
           const response = await api.get(`/task-service/api/tasks/user/${userId}`);

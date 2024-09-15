@@ -29,6 +29,7 @@ const LoginPage = () => {
       const tokeJwt = response.data;
       const decoded: iDecodedToken = jwtDecode(tokeJwt);
 
+      console.log(tokeJwt);
       console.log(decoded);
 
       login(tokeJwt, decoded.name, decoded.userId);

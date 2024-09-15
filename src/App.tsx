@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContextType";
 import { Box, Container } from "@chakra-ui/react";
@@ -17,11 +17,10 @@ const PrivateRoute = ({ children }: { children: React.ReactElement }) => {
 
 const App = () => {
   const { token, restoreContext } = useAuth();
-  useEffect(() => {
-    if (!token) {
-      restoreContext();
-    }
-  });
+  if (!token) {
+    restoreContext();
+  }
+
   return (
     <Container maxW="xl" centerContent>
       <Box p={4}>
