@@ -6,6 +6,7 @@ import { useAuth } from "./context/AuthContextType";
 import { Box, Container } from "@chakra-ui/react";
 import Profile from "./pages/Profile";
 import History from "./pages/History";
+import SignupPage from "./pages/SignupPage";
 
 const PrivateRoute = ({ children }: { children: React.ReactElement }) => {
   const { token } = useAuth();
@@ -30,7 +31,7 @@ const App = () => {
               }
             />
             <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/teste" element={<TodoList />} />
+            <Route path="/signup" element={<SignupPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/history" element={<History />} />
           </Routes>

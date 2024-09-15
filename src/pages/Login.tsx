@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContextType";
-import { Box, Button, Input, Stack, FormControl, FormLabel, Heading, InputRightElement, InputGroup } from "@chakra-ui/react";
+import { Box, Button, Input, Stack, FormControl, FormLabel, Heading, InputRightElement, InputGroup, Text } from "@chakra-ui/react";
 import api from "../services/api";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +38,10 @@ const Login = () => {
     }
   };
 
+  const handleNewAccount = () => {
+    navigate("/signup");
+  };
+
   return (
     <Box w="100%" h="100vh" display="flex" alignItems="center" justifyContent="center">
       <Box p={8} maxWidth="600px" borderWidth={1} borderRadius={8} boxShadow="lg">
@@ -70,6 +74,9 @@ const Login = () => {
             Login
           </Button>
         </Stack>
+        <Text mt="4" align="center" cursor="pointer" onClick={handleNewAccount}>
+          Criar nova conta
+        </Text>
       </Box>
     </Box>
   );
