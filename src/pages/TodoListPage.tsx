@@ -8,7 +8,7 @@ import AddTaskModal from "../components/AddTaskModal";
 import EditTaskModal from "../components/EditTaskModal";
 import api from "../services/api";
 import iAddTodo from "../interfaces/iAddTodo";
-import initialEditTodo from "../utils/initialEditTodo";
+import initialEditTodo from "../utils/InitialEditTodo";
 
 const TodoListPage = () => {
   const [todos, setTodos] = useState<iTodo[]>([]);

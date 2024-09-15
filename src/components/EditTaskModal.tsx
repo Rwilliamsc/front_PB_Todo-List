@@ -13,7 +13,7 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import iTodo from "../interfaces/iTodo";
-import initialEditTodo from "../utils/initialEditTodo";
+import initialEditTodo from "../utils/InitialEditTodo";
 
 interface EditTaskModalProps {
   onSave: (item: iTodo) => void;
