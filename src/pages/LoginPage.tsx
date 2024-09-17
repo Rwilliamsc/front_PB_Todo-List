@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContextType";
-import { Box, Button, Input, Stack, FormControl, FormLabel, Heading, InputRightElement, InputGroup, Text } from "@chakra-ui/react";
+import { Box, Button, Input, Stack, FormControl, FormLabel, Heading, InputRightElement, InputGroup, Text, useToast } from "@chakra-ui/react";
 import api from "../services/api";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -20,12 +20,22 @@ const LoginPage = () => {
   const [show, setShow] = React.useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleClick = () => setShow(!show);
 
   const handleLogin = async () => {
     try {
       const response = await api.post("/oauth-service/api/auth/login", { username, password });
+      if (response.status !== 200) {
+        toast({
+          title: "Não foi possível logar!",
+          description: `Login ou senha inválida.`,
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
       const tokeJwt = response.data;
       const decoded: iDecodedToken = jwtDecode(tokeJwt);
 
@@ -36,6 +46,13 @@ const LoginPage = () => {
       navigate("/todos");
     } catch (err) {
       console.error("Failed to login", err);
+      toast({
+        title: "Não foi possível logar!",
+        description: `Login ou senha inválida.`,
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
     }
   };
 
